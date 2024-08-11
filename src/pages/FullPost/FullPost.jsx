@@ -15,7 +15,9 @@ export default function FullPost() {
       <div className={styles.preview}>
         <PostContent post={data} />
       </div>
-      <Markdown className={`${styles.markdown} markdown`}>{data.body}</Markdown>
+      <div className={styles.markdown}>
+        <Markdown>{data.body}</Markdown>
+      </div>
     </div>
   )
 }
