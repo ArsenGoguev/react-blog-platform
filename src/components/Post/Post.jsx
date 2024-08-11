@@ -5,18 +5,28 @@ import { Link } from 'react-router-dom'
 import { v4 as generateId } from 'uuid'
 import { HeartFilled, HeartOutlined } from '@ant-design/icons'
 
-import defaultAvatar from '../../styles/images/user.png'
-
 import styles from './Post.module.scss'
 
 export default function Post({ post }) {
-  const avatar = post.author.image || defaultAvatar
+  return (
+    <div className={styles.post}>
+      <PostContent post={post} />
+    </div>
+  )
+}
+
+export function PostContent({ post }) {
+  const avatar = post.author.image
   const tags = post.tagList
-    ? post.tagList.map((tag) => (
-        <Tag className={styles.tag} key={generateId()}>
-          {tag}
-        </Tag>
-      ))
+    ? post.tagList.map((tag) => {
+        if (tag && tag.trim())
+          return (
+            <Tag className={styles.tag} key={generateId()}>
+              {tag}
+            </Tag>
+          )
+        return null
+      })
     : []
 
   const date = new Date(post.createdAt)
@@ -24,10 +34,10 @@ export default function Post({ post }) {
   const formattedDate = date.toLocaleDateString('en-US', options)
 
   return (
-    <div className={styles.post}>
+    <>
       <div className={styles.main}>
         <div className={styles.header}>
-          <Link to="/" className={styles.title}>
+          <Link className={styles.title} to={`/articles/${post.slug}`} state={{ data: post }}>
             {post.title}
           </Link>
           <div className={styles.likes}>
@@ -36,7 +46,9 @@ export default function Post({ post }) {
           </div>
         </div>
 
-        <Flex>{tags.map((tag) => tag)}</Flex>
+        <Flex wrap gap={8} className={styles.tags}>
+          {tags.map((tag) => tag)}
+        </Flex>
         <p className={styles.text}>{post.description}</p>
       </div>
 
@@ -47,26 +59,26 @@ export default function Post({ post }) {
         </div>
         <img className={styles.avatar} src={avatar} alt="avatar" />
       </div>
-    </div>
+    </>
   )
 }
 
 Post.propTypes = {
+  post: PropTypes.object.isRequired
+}
+
+PostContent.propTypes = {
   post: PropTypes.shape({
     slug: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    body: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    description: PropTypes.string,
     tagList: PropTypes.arrayOf(PropTypes.string),
     createdAt: PropTypes.string.isRequired,
-    updatedAt: PropTypes.string.isRequired,
     favorited: PropTypes.bool.isRequired,
     favoritesCount: PropTypes.number.isRequired,
     author: PropTypes.shape({
       username: PropTypes.string.isRequired,
-      bio: PropTypes.string,
-      image: PropTypes.string.isRequired,
-      following: PropTypes.bool.isRequired
+      image: PropTypes.string.isRequired
     }).isRequired
   }).isRequired
 }

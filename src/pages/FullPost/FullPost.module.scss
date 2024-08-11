@@ -1,0 +1,19 @@
+@import '../../styles/variables.scss';
+
+.post {
+  margin: 108px auto 30px;
+  background-color: $bg-color;
+  max-width: 938px;
+  box-shadow: $shadow;
+  padding: 16px;
+
+  .preview {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .markdown {
+    margin-top: 26px;
+    word-break: break-all;
+  }
+}

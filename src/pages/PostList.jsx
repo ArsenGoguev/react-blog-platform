@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Alert, Spin } from 'antd'
 
 import Post from '../components/Post/Post.jsx'
 import CustomPagination from '../components/CustomPagination/CustomPagination.jsx'
@@ -11,13 +12,14 @@ export default function PostList() {
   const page = useSelector((state) => state.blog.page)
   const { data, error, isLoading } = useGetPostsQuery(page)
 
-  useEffect(() => {
-    dispatch(setPage(1))
-  }, [dispatch])
-
-  if (isLoading) return <p>Loading...</p>
-  if (error) return <p>Error</p>
-
+  if (isLoading)
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '108px' }}>
+        <Spin size="large" />
+      </div>
+    )
+  if (error)
+    return <Alert type="error" message="Error" description="Something went wrong. Try to reload the page." showIcon />
   const posts = data.articles.map((post) => <Post key={post.slug} post={post} />)
 
   const handlePageChange = (newPage) => {
