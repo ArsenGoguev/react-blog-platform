@@ -14,7 +14,7 @@
   z-index: 100;
   top: 0;
   box-shadow: 0 1px 32px -30px black;
-  
+
   .site-name {
     font-size: 18px;
     line-height: 28px;
@@ -34,7 +34,8 @@
     display: flex;
     gap: 19px;
 
-    .login, .reg {
+    .login,
+    .reg {
       display: block;
       font-family: $font;
     }
@@ -54,9 +55,9 @@
     }
 
     .reg {
-      color: #52C41A;
+      color: #52c41a;
       padding: 10px;
-      border: 1px solid #52C41A;
+      border: 1px solid #52c41a;
       border-radius: 5px;
 
       &:hover {
@@ -64,7 +65,7 @@
       }
 
       &:visited {
-        color: #52C41A;
+        color: #52c41a;
       }
     }
   }

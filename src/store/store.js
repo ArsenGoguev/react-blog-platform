@@ -3,11 +3,11 @@ import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 
 import { blogApi } from './blogApi.js'
-// import blogReducer from './blogSlice.js'
+import blogReducer from './blogReducer.js'
 
 const rootReducer = combineReducers({
-  [blogApi.reducerPath]: blogApi.reducer
-  // blog: blogReducer
+  [blogApi.reducerPath]: blogApi.reducer,
+  blog: blogReducer
 })
 
 const store = configureStore({
