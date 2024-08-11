@@ -1,0 +1,113 @@
+@import '../../styles/variables.scss';
+
+.post {
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+  max-width: 938px;
+  height: auto;
+  background-color: $bg-color;
+  box-shadow: $shadow;
+  overflow: hidden; 
+
+  margin-top: 26px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 16px;
+
+  &:first-child {
+    margin-top: 106px;
+  }
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+
+      .title {
+        cursor: pointer;
+        margin: 0;
+        display: inline-block;
+
+        color: $accent-color;
+        font-family: $font;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 28px;
+        text-align: left;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .likes {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        .count {
+          display: inline-block;
+          font-family: $font;
+          font-size: 12px;
+          line-height: 22px;
+          text-align: left;
+
+        }
+      }
+    }
+
+    .tag {
+      background-color: white;
+      border-color: $text-color-main;
+      border-radius: 3px;
+    }
+
+    .text {
+      margin: 0;
+
+      font-family: $font;
+      font-size: 12px;
+      line-height: 22px;
+      text-align: left;
+      max-width: 680px;
+    }
+  }
+
+  .author {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    vertical-align: middle;
+
+    .name {
+      font-family: $font;
+      font-size: 18px;
+      line-height: 28px;
+      text-align: left;
+    }
+
+    .date {
+      font-family: $font;
+      font-size: 12px;
+      line-height: 22px;
+      text-align: left;
+      color: $text-color-light;
+    }
+
+    .avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+    }
+  }
+}

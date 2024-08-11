@@ -1,0 +1,71 @@
+@import '../../styles/variables.scss';
+
+.header {
+  width: 100%;
+  height: 80px;
+  background-color: #fff;
+  font-family: Inter;
+  display: flex;
+  justify-content: space-between;
+  vertical-align: middle;
+  align-items: center;
+  padding: 22px;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  box-shadow: 0 1px 32px -30px black;
+  
+  .site-name {
+    font-size: 18px;
+    line-height: 28px;
+    text-align: left;
+    font-weight: 400;
+
+    &:visited {
+      color: $text-color-main;
+    }
+
+    &:hover {
+      color: $accent-color;
+    }
+  }
+
+  .account-block {
+    display: flex;
+    gap: 19px;
+
+    .login, .reg {
+      display: block;
+      font-family: $font;
+    }
+
+    .login {
+      padding: 10px;
+      border-radius: 5px;
+      font-family: $font;
+
+      &:hover {
+        background-color: rgb(247, 247, 247);
+      }
+
+      &:visited {
+        color: $text-color-main;
+      }
+    }
+
+    .reg {
+      color: #52C41A;
+      padding: 10px;
+      border: 1px solid #52C41A;
+      border-radius: 5px;
+
+      &:hover {
+        background-color: rgb(247, 247, 247);
+      }
+
+      &:visited {
+        color: #52C41A;
+      }
+    }
+  }
+}
