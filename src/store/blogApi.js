@@ -2,7 +2,16 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const blogApi = createApi({
   reducerPath: 'blogApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://blog.kata.academy/api/' }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'https://blog.kata.academy/api/',
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem('token')
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`)
+      }
+      return headers
+    }
+  }),
   endpoints: (builder) => ({
     getPosts: builder.query({
       query: (page) => `articles?limit=5&offset=${(page - 1) * 5}`
@@ -10,9 +19,19 @@ export const blogApi = createApi({
     getPost: builder.query({
       query: (id) => `articles/${id}`
     }),
+    getUser: builder.query({
+      query: () => 'user'
+    }),
     loginIn: builder.mutation({
       query: (credentials) => ({
         url: 'users/login',
+        method: 'POST',
+        body: { user: credentials }
+      })
+    }),
+    signUp: builder.mutation({
+      query: (credentials) => ({
+        url: 'users',
         method: 'POST',
         body: { user: credentials }
       })
@@ -20,33 +39,4 @@ export const blogApi = createApi({
   })
 })
 
-export const { useGetPostsQuery, useGetPostQuery, useLoginInMutation } = blogApi
-
-/*
-
-  POST /users/login
-  $ curl \
-    -X POST /api/users/login \
-    -H "Content-Type: application/json" \
-    -d '{"user":{"email":"string","password":"string"}}'
-
-  Request example
-    {
-      "user": {
-        "email": "string",
-        "password": "string"
-      }
-    }
-
-  Response example
-    {
-    "user": {
-      "email": "jake@jake.jake",
-      "token": "jwt.token.here",
-      "username": "jake",
-      "bio": "I work at State Farm.",
-      "image": null,
-      }
-    }
-
-*/
+export const { useGetPostsQuery, useGetPostQuery, useGetUserQuery, useLoginInMutation, useSignUpMutation } = blogApi

@@ -1,10 +1,10 @@
 @import './variables.scss';
 
-@mixin form ($width, $height) {
+@mixin form($width, $height) {
   background-color: $bg-color;
   margin: 139px auto 30px;
   width: $width;
-  height: $height;
+  min-height: $height;
   padding: 48px 32px;
   box-shadow: $shadow;
   border-radius: 5px;
@@ -38,5 +38,27 @@
         color: $accent-color;
       }
     }
+  }
+}
+
+@mixin profilePicture () {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+}
+
+@mixin authButton ($color, $padding, $border) {
+  background-color: $bg-color;
+  color: $color;
+  padding: $padding;
+  border: $border;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: rgb(250, 250, 250);
+  }
+
+  &:visited {
+    color: $color;
   }
 }

@@ -53,6 +53,7 @@ export default [
   },
   {
     rules: {
+      'object-curly-newline': 0,
       indent: ['error', 2],
       'jsx-a11y/no-noninteractive-element-interactions': 0,
       'jsx-a11y/tabindex-no-positive': 0,
