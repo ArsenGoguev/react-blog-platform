@@ -7,6 +7,7 @@ import Layout from '../components/Layout.jsx'
 import FullPost from '../pages/FullPost/FullPost.jsx'
 import LoginPage from '../pages/LoginPage/LoginPage.jsx'
 import RegistrationPage from '../pages/RegistrationPage/RegistrationPage.jsx'
+import ProfileEditor from '../pages/ProfileEditor/ProfileEditor.jsx'
 
 export default function App() {
   const router = createBrowserRouter(
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/articles/:slug" element={<FullPost />} />
         <Route path="/login-in" element={<LoginPage />} />
         <Route path="/sign-up" element={<RegistrationPage />} />
+        <Route path="/profile" element={<ProfileEditor />} />
         <Route
           path="*"
           element={

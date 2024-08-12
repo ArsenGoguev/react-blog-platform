@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Form, Input, Button, Spin } from 'antd'
+import { Form, Input, Button, Spin, Alert } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
@@ -29,10 +29,17 @@ export default function LoginPage() {
 
   const getMargin = (num) => ({ marginBottom: num })
 
-  if (error) return <div>Error</div>
   return (
     <div className={styles.form}>
       {isLoading ? <Spin size="large" fullscreen /> : null}
+      {error ? (
+        <Alert
+          style={{ marginBottom: 21 }}
+          message="Ошибка"
+          type="error"
+          description="Что-то пошло не так. Попробуйте еще раз."
+        />
+      ) : null}
       <div className={styles.header}>Sign In</div>
       <Form onFinish={signIn} layout="vertical">
         <Form.Item style={getMargin(12)} label="Email address" name="email">

@@ -51,7 +51,7 @@ export default function Header() {
       <Link to="/" className={styles.create}>
         Create article
       </Link>
-      <Link to="/" className={styles.user}>
+      <Link to="/profile" className={styles.user}>
         <span className={styles.username}>{user.username}</span>
         <img className={styles.image} src={user.image || defaultPicture} alt="avatar" />
       </Link>

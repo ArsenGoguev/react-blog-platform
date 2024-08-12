@@ -47,7 +47,7 @@
 
     .create {
       text-align: center;
-      @include authButton ($button-color, 6px 10px, 1px solid $button-color)
+      @include authButton($button-color, 6px 10px, 1px solid $button-color);
     }
 
     .user {
@@ -69,8 +69,6 @@
         line-height: 28px;
         text-align: left;
         color: $text-color-main;
-
-
       }
 
       .image {
@@ -80,15 +78,15 @@
 
     .logout {
       cursor: pointer;
-      @include authButton ($text-color-main, 13px, 1px solid $text-color-main);
+      @include authButton($text-color-main, 13px, 1px solid $text-color-main);
     }
 
     .login {
-      @include authButton ($text-color-main, 10px, none);
+      @include authButton($text-color-main, 10px, none);
     }
 
     .reg {
-      @include authButton ($button-color, 10px, 1px solid $button-color);
+      @include authButton($button-color, 10px, 1px solid $button-color);
     }
   }
 }

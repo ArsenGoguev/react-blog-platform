@@ -41,13 +41,13 @@
   }
 }
 
-@mixin profilePicture () {
+@mixin profilePicture() {
   width: 46px;
   height: 46px;
   border-radius: 50%;
 }
 
-@mixin authButton ($color, $padding, $border) {
+@mixin authButton($color, $padding, $border) {
   background-color: $bg-color;
   color: $color;
   padding: $padding;
