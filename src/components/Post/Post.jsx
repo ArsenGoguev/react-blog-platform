@@ -19,12 +19,13 @@ export function PostContent({ post }) {
   const avatar = post.author.image
   const tags = post.tagList
     ? post.tagList.map((tag) => {
-        if (tag && tag.trim())
+        if (tag && tag.trim()) {
           return (
             <Tag className={styles.tag} key={generateId()}>
               {tag}
             </Tag>
           )
+        }
         return null
       })
     : []

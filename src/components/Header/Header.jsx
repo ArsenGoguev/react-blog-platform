@@ -10,10 +10,10 @@ export default function Header() {
         Realworld Blog
       </Link>
       <div className={styles['account-block']}>
-        <Link to="/" className={styles.login}>
+        <Link to="/login-in" className={styles.login}>
           Login In
         </Link>
-        <Link to="/" className={styles.reg}>
+        <Link to="/sign-up" className={styles.reg}>
           Sign In
         </Link>
       </div>

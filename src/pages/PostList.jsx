@@ -12,12 +12,13 @@ export default function PostList() {
   const page = useSelector((state) => state.blog.page)
   const { data, error, isLoading } = useGetPostsQuery(page)
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '108px' }}>
         <Spin size="large" />
       </div>
     )
+  }
   if (error)
     return <Alert type="error" message="Error" description="Something went wrong. Try to reload the page." showIcon />
   const posts = data.articles.map((post) => <Post key={post.slug} post={post} />)

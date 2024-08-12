@@ -1,0 +1,42 @@
+@import './variables.scss';
+
+@mixin form ($width, $height) {
+  background-color: $bg-color;
+  margin: 139px auto 30px;
+  width: $width;
+  height: $height;
+  padding: 48px 32px;
+  box-shadow: $shadow;
+  border-radius: 5px;
+
+  .header {
+    font-family: $font;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+    text-align: center;
+    margin-bottom: 21px;
+  }
+
+  .button {
+    width: 100%;
+    background-color: $accent-color;
+    height: 40px !important;
+  }
+
+  .alert {
+    font-family: $font;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: center;
+
+    .signin {
+      color: $accent-color;
+
+      &:visited {
+        color: $accent-color;
+      }
+    }
+  }
+}

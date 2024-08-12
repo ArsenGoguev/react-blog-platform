@@ -1,0 +1,15 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.form {
+  @include form(384px, 599px);
+
+  .divider {
+    margin-top: 21px;
+    margin-bottom: 8px;
+  }
+
+  .checkbox {
+    gap: 8px;
+  }
+}
