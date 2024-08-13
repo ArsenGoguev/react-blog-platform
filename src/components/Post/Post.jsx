@@ -54,9 +54,9 @@ export function PostContent({ post }) {
   return (
     <>
       <div className={styles.main}>
-        {(favError || remError) && <Alert type="error" message=" возникла ошибка" />}
+        {(favError || remError) && <Alert type="error" message="error" />}
         <div className={styles.header}>
-          <Link className={styles.title} to={`/articles/${post.slug}`} state={{ data: post }}>
+          <Link className={styles.title} to={`/articles/${post.slug}`} state={{ slug: post.slug }}>
             {post.title}
           </Link>
           <button type="button" disabled={!isAuth} className={styles.likes} onClick={handleFavorite}>

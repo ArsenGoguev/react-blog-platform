@@ -17,8 +17,6 @@ export default function RegistrationPage() {
     signUp({ username, email, password })
   }
 
-  if (error) console.log(error)
-
   return (
     <div className={styles.form}>
       {isLoading ? <Spin size="large" fullscreen /> : null}

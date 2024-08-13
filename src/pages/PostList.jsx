@@ -1,7 +1,8 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Alert, Spin } from 'antd'
+import { Alert } from 'antd'
 
+import Spinner from '../components/Spinner/Spinner.jsx'
 import Post from '../components/Post/Post.jsx'
 import CustomPagination from '../components/CustomPagination/CustomPagination.jsx'
 import { useGetPostsQuery } from '../store/blogApi.js'
@@ -12,13 +13,7 @@ export default function PostList() {
   const page = useSelector((state) => state.blog.page)
   const { data, error, isLoading } = useGetPostsQuery(page)
 
-  if (isLoading) {
-    return (
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '108px' }}>
-        <Spin size="large" />
-      </div>
-    )
-  }
+  if (isLoading) return <Spinner />
   if (error) {
     return <Alert type="error" message="Error" description="Something went wrong. Try to reload the page." showIcon />
   }
