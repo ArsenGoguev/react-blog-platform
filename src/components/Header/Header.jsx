@@ -35,7 +35,7 @@ export default function Header() {
         Login In
       </Link>
       <Link to="/sign-up" className={styles.reg}>
-        Sign In
+        Sign Up
       </Link>
     </>
   )

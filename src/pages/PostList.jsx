@@ -19,8 +19,9 @@ export default function PostList() {
       </div>
     )
   }
-  if (error)
+  if (error) {
     return <Alert type="error" message="Error" description="Something went wrong. Try to reload the page." showIcon />
+  }
   const posts = data.articles.map((post) => <Post key={post.slug} post={post} />)
 
   const handlePageChange = (newPage) => {

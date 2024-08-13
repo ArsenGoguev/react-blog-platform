@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { v4 as generateId } from 'uuid'
 import { HeartFilled, HeartOutlined } from '@ant-design/icons'
+import { useSelector } from 'react-redux'
 
 import { useFavoritePostMutation, useUnfavoritePostMutation } from '../../store/blogApi.js'
 
@@ -18,6 +19,7 @@ export default function Post({ post }) {
 }
 
 export function PostContent({ post }) {
+  const isAuth = useSelector((state) => state.blog.auth)
   const [favoritePost, { isFavLoading, favError }] = useFavoritePostMutation()
   const [unfavoritePost, { isRemLoading, remError }] = useUnfavoritePostMutation()
 
@@ -57,7 +59,7 @@ export function PostContent({ post }) {
           <Link className={styles.title} to={`/articles/${post.slug}`} state={{ data: post }}>
             {post.title}
           </Link>
-          <button type="button" className={styles.likes} onClick={handleFavorite}>
+          <button type="button" disabled={!isAuth} className={styles.likes} onClick={handleFavorite}>
             {post.favorited ? <HeartFilled style={{ color: '#f44336' }} /> : <HeartOutlined />}
             <span className={styles.count}>{post.favoritesCount}</span>
           </button>

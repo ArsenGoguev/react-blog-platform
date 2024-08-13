@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Input, Button, Spin, Alert } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { useHandleUserResponse, getMargin } from '../../utils/utils.js'
+import { useHandleUserResponse, getMargin, formRules } from '../../utils/utils.js'
 import { useLoginInMutation } from '../../store/blogApi.js'
 
 import styles from './LoginPage.module.scss'
@@ -22,26 +22,21 @@ export default function LoginPage() {
     <div className={styles.form}>
       {isLoading ? <Spin size="large" fullscreen /> : null}
       {error ? (
-        <Alert
-          style={{ marginBottom: 21 }}
-          message="Ошибка"
-          type="error"
-          description="Что-то пошло не так. Попробуйте еще раз."
-        />
+        <Alert banner closable style={{ marginBottom: 21 }} message="Invalid e-mail or password" type="error" />
       ) : null}
       <div className={styles.header}>Sign In</div>
       <Form onFinish={signIn} layout="vertical">
-        <Form.Item style={getMargin(12)} label="Email address" name="email">
+        <Form.Item style={getMargin(12)} label="Email address" name="email" rules={formRules.email}>
           <Input placeholder="Email address" />
         </Form.Item>
 
-        <Form.Item style={getMargin(21)} label="Password" name="password">
+        <Form.Item style={getMargin(21)} label="Password" name="password" rules={formRules.password}>
           <Input.Password placeholder="Password" />
         </Form.Item>
 
         <Form.Item style={getMargin(8)}>
           <Button className={styles.button} type="primary" htmlType="submit">
-            Create
+            Login
           </Button>
         </Form.Item>
       </Form>
