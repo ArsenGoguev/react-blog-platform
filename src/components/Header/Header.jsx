@@ -42,7 +42,7 @@ export default function Header() {
 
   const authHeader = (
     <>
-      <Link to="/" className={styles.create}>
+      <Link to="/new-article" className={styles.create}>
         Create article
       </Link>
       <Link to="/profile" className={styles.user}>
