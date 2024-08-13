@@ -1,9 +1,11 @@
 import React from 'react'
-import { Flex, Tag } from 'antd'
+import { Alert, Flex, Spin, Tag } from 'antd'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { v4 as generateId } from 'uuid'
 import { HeartFilled, HeartOutlined } from '@ant-design/icons'
+
+import { useFavoritePostMutation, useUnfavoritePostMutation } from '../../store/blogApi.js'
 
 import styles from './Post.module.scss'
 
@@ -16,6 +18,19 @@ export default function Post({ post }) {
 }
 
 export function PostContent({ post }) {
+  const [favoritePost, { isFavLoading, favError }] = useFavoritePostMutation()
+  const [unfavoritePost, { isRemLoading, remError }] = useUnfavoritePostMutation()
+
+  if (isFavLoading) console.log('ku')
+
+  const handleFavorite = () => {
+    if (post.favorited) {
+      unfavoritePost(post.slug)
+    } else {
+      favoritePost(post.slug)
+    }
+  }
+
   const avatar = post.author.image
   const tags = post.tagList
     ? post.tagList.map((tag) => {
@@ -37,14 +52,16 @@ export function PostContent({ post }) {
   return (
     <>
       <div className={styles.main}>
+        {(favError || remError) && <Alert type="error" message=" возникла ошибка" />}
         <div className={styles.header}>
           <Link className={styles.title} to={`/articles/${post.slug}`} state={{ data: post }}>
             {post.title}
           </Link>
-          <div className={styles.likes}>
+          <button type="button" className={styles.likes} onClick={handleFavorite}>
             {post.favorited ? <HeartFilled style={{ color: '#f44336' }} /> : <HeartOutlined />}
             <span className={styles.count}>{post.favoritesCount}</span>
-          </div>
+          </button>
+          {(isFavLoading || isRemLoading) && <Spin />}
         </div>
 
         <Flex wrap gap={8} className={styles.tags}>

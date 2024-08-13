@@ -1,33 +1,22 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Form, Input, Button, Spin, Alert } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 
+import { useHandleUserResponse, getMargin } from '../../utils/utils.js'
 import { useLoginInMutation } from '../../store/blogApi.js'
-import { setUser } from '../../store/blogReducer.js'
 
 import styles from './LoginPage.module.scss'
 
 export default function LoginPage() {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [loginIn, { data, isLoading, error }] = useLoginInMutation()
+
+  useHandleUserResponse(data, navigate)
 
   const signIn = (event) => {
     const { email, password, image } = event
     loginIn({ email, password, image })
   }
-
-  useEffect(() => {
-    if (data) {
-      const { username, email, image, token } = data.user
-      localStorage.setItem('token', token)
-      dispatch(setUser({ username, email, image }))
-      navigate('/')
-    }
-  }, [data, dispatch, navigate])
-
-  const getMargin = (num) => ({ marginBottom: num })
 
   return (
     <div className={styles.form}>

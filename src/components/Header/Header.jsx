@@ -14,13 +14,7 @@ export default function Header() {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.blog.user)
   const token = localStorage.getItem('token')
-  const { data, isLoading, error, refetch } = useGetUserQuery(undefined, { skip: !token })
-
-  useEffect(() => {
-    if (token) {
-      refetch()
-    }
-  }, [token, refetch])
+  const { data, isLoading, error } = useGetUserQuery(undefined, { skip: !token })
 
   useEffect(() => {
     if (data) {
@@ -63,7 +57,7 @@ export default function Header() {
 
   return (
     <div className={styles.header}>
-      <Link to="/" className={styles['site-name']}>
+      <Link to="/articles" className={styles['site-name']}>
         Realworld Blog
       </Link>
       <div className={styles['account-block']}>

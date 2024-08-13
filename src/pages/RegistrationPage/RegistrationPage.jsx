@@ -1,32 +1,21 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Form, Input, Checkbox, Button, Divider, Spin, Alert } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 
+import { useHandleUserResponse, getMargin } from '../../utils/utils.js'
 import { useSignUpMutation } from '../../store/blogApi.js'
-import { setUser } from '../../store/blogReducer.js'
 
 import styles from './RegistrationPage.module.scss'
 
 export default function RegistrationPage() {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [signUp, { data, isLoading, error }] = useSignUpMutation()
+
+  useHandleUserResponse(data, navigate)
 
   const handleSignUp = ({ username, email, password }) => {
     signUp({ username, email, password })
   }
-
-  useEffect(() => {
-    if (data) {
-      const { username, email, token, image } = data.user
-      localStorage.setItem('token', token)
-      dispatch(setUser({ username, email, image }))
-      navigate('/')
-    }
-  }, [data, dispatch, navigate])
-
-  const getMargin = (num) => ({ marginBottom: num })
 
   return (
     <div className={styles.form}>

@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   page: 1,
-  user: {}
+  user: {},
+  auth: false
 }
 
 const blogReducer = createSlice({
@@ -10,8 +11,8 @@ const blogReducer = createSlice({
   initialState,
   reducers: {
     setPage: (state, action) => ({ ...state, page: action.payload }),
-    setUser: (state, action) => ({ ...state, user: action.payload }),
-    removeUserInfo: (state) => ({ ...state, user: {} })
+    setUser: (state, action) => ({ ...state, user: action.payload, auth: true }),
+    removeUserInfo: (state) => ({ ...state, user: {}, auth: false })
   }
 })
 
