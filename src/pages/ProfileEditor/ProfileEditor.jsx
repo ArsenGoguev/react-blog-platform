@@ -3,7 +3,9 @@ import { Form, Input, Button, Spin, Alert } from 'antd'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { useHandleUserResponse, getMargin, editProfileForm } from '../../utils/utils.js'
+import { useHandleUserResponse } from '../../utils/hooks.js'
+import { getMarginBottom, getErrorMessage } from '../../utils/service.js'
+import { editProfileForm } from '../../utils/formRules.js'
 import { useUpdateUserMutation } from '../../store/blogApi.js'
 
 import styles from './ProfileEditor.module.scss'
@@ -26,37 +28,45 @@ export default function ProfileEditor() {
     })
   }
 
+  const errorFields = getErrorMessage(error)
+
   return (
     <div className={styles.form}>
       {isLoading ? <Spin size="large" fullscreen /> : null}
-      {error ? (
-        <Alert banner closable style={{ marginBottom: 21 }} message="Something went wrong, try again" type="error" />
+      {errorFields.length > 0 ? (
+        <Alert banner closable style={{ marginBottom: 21 }} message="You entered incorrect data" type="error" />
       ) : null}
       <div className={styles.header}>Edit Profile</div>
       <Form form={form} layout="vertical" onFinish={handleEdit}>
-        <Form.Item style={getMargin(12)} label="Username" name="username" rules={editProfileForm.username}>
+        <Form.Item style={getMarginBottom(12)} label="Username" name="username" rules={editProfileForm.username}>
           <Input placeholder="Username" />
         </Form.Item>
 
-        <Form.Item style={getMargin(12)} label="Email address" name="email" rules={editProfileForm.email}>
+        <Form.Item style={getMarginBottom(12)} label="Email address" name="email" rules={editProfileForm.email}>
           <Input placeholder="Email address" />
         </Form.Item>
 
-        <Form.Item style={getMargin(12)} label="New password" name="password" rules={editProfileForm.password}>
+        <Form.Item style={getMarginBottom(12)} label="New password" name="password" rules={editProfileForm.password}>
           <Input.Password placeholder="New password" />
         </Form.Item>
 
-        <Form.Item style={getMargin(21)} label="Avatar image (url)" name="image" rules={editProfileForm.avatarImage}>
+        <Form.Item
+          style={getMarginBottom(21)}
+          label="Avatar image (url)"
+          name="image"
+          rules={editProfileForm.avatarImage}
+        >
           <Input placeholder="Avatar image" />
         </Form.Item>
 
-        <Form.Item style={getMargin(0)}>
+        <Form.Item style={getMarginBottom(0)}>
           <Button className={styles.button} type="primary" htmlType="submit">
             Save
           </Button>
         </Form.Item>
       </Form>
       {isSuccess && <Alert style={{ marginTop: 12 }} type="success" message="Данные успешно обновлены" showIcon />}
+      {errorFields.length > 0 && form.setFields(errorFields)}
     </div>
   )
 }

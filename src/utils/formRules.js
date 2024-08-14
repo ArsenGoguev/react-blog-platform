@@ -1,23 +1,3 @@
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-
-import { setUser } from '../store/blogReducer.js'
-
-export const useHandleUserResponse = (data, navigate, editing = false) => {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    if (data) {
-      const { username, email, image, token } = data.user
-      localStorage.setItem('token', token)
-      dispatch(setUser({ username, email, image }))
-      if (!editing) navigate('/')
-    }
-  }, [data, dispatch, navigate, editing])
-}
-
-export const getMargin = (num) => ({ marginBottom: num })
-
 const recurringRules = {
   username: [
     {
@@ -47,7 +27,7 @@ const recurringRules = {
 
 export const formRules = {
   email: [
-    recurringRules.email,
+    ...recurringRules.email,
     {
       required: true,
       message: 'The email should not be empty'
@@ -58,14 +38,14 @@ export const formRules = {
       required: true,
       message: 'Username should not be empty'
     },
-    recurringRules.username
+    ...recurringRules.username
   ],
   password: [
     {
       required: true,
       message: 'The password must not be empty'
     },
-    recurringRules.password
+    ...recurringRules.password
   ],
   repeatPassword: [
     {

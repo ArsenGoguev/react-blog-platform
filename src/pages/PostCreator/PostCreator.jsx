@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Input, Button } from 'antd'
 
-import { getMargin } from '../../utils/utils.js'
+import { getMarginBottom } from '../../utils/service.js'
 
 import styles from './PostCreator.module.scss'
 
@@ -13,19 +13,19 @@ export default function PostCreator() {
       <div className={styles.header}>Create new article</div>
 
       <Form layout="vertical" onFinish={handleCreate}>
-        <Form.Item style={getMargin(21)} label="Title" name="title">
+        <Form.Item style={getMarginBottom(21)} label="Title" name="title">
           <Input placeholder="Title" />
         </Form.Item>
 
-        <Form.Item style={getMargin(21)} label="Short description" name="description">
+        <Form.Item style={getMarginBottom(21)} label="Short description" name="description">
           <Input placeholder="Description" />
         </Form.Item>
 
-        <Form.Item style={getMargin(21)} label="Text" name="text">
+        <Form.Item style={getMarginBottom(21)} label="Text" name="text">
           <Input.TextArea placeholder="Text" rows={8} />
         </Form.Item>
 
-        <Form.Item style={getMargin(0)}>
+        <Form.Item style={getMarginBottom(0)}>
           <Button className={styles.button} type="primary" htmlType="submit">
             Send
           </Button>
