@@ -3,4 +3,8 @@
 
 .form {
   @include form(384px, 374px);
+
+  .alert {
+    @include alert;
+  }
 }

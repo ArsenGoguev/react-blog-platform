@@ -19,24 +19,23 @@
   }
 
   .button {
-    width: 100%;
     background-color: $accent-color;
     height: 40px !important;
   }
+}
 
-  .alert {
-    font-family: $font;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 20px;
-    text-align: center;
+@mixin alert {
+  font-family: $font;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: center;
 
-    .signin {
+  .signin {
+    color: $accent-color;
+
+    &:visited {
       color: $accent-color;
-
-      &:visited {
-        color: $accent-color;
-      }
     }
   }
 }

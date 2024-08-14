@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { useHandleUserResponse } from '../../utils/hooks.js'
-import { getMarginBottom, getErrorMessage } from '../../utils/service.js'
+import { getMarginBottom, handleEmailChange, getErrorMessage } from '../../utils/service.js'
 import { editProfileForm } from '../../utils/formRules.js'
 import { useUpdateUserMutation } from '../../store/blogApi.js'
 
@@ -43,7 +43,7 @@ export default function ProfileEditor() {
         </Form.Item>
 
         <Form.Item style={getMarginBottom(12)} label="Email address" name="email" rules={editProfileForm.email}>
-          <Input placeholder="Email address" />
+          <Input onChange={(e) => handleEmailChange(e, form)} placeholder="Email address" />
         </Form.Item>
 
         <Form.Item style={getMarginBottom(12)} label="New password" name="password" rules={editProfileForm.password}>
@@ -60,7 +60,7 @@ export default function ProfileEditor() {
         </Form.Item>
 
         <Form.Item style={getMarginBottom(0)}>
-          <Button className={styles.button} type="primary" htmlType="submit">
+          <Button block className={styles.button} type="primary" htmlType="submit">
             Save
           </Button>
         </Form.Item>

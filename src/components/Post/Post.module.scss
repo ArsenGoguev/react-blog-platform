@@ -125,3 +125,14 @@
     @include profilePicture;
   }
 }
+
+.buttonsWrapper {
+  display: flex;
+  gap: 12px;
+  margin-top: 30px;
+  justify-content: end;
+
+  .editButton {
+    @include authButton($button-color, 5px 20px, 1px solid $button-color);
+  }
+}

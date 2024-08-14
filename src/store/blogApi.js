@@ -69,6 +69,29 @@ export const blogApi = createApi({
         method: 'DELETE'
       }),
       invalidatesTags: (result, error, slug) => [{ type: 'Posts', id: slug }]
+    }),
+    createArticle: builder.mutation({
+      query: (articleData) => ({
+        url: 'articles',
+        method: 'POST',
+        body: { article: articleData }
+      }),
+      invalidatesTags: [{ type: 'Posts', id: 'LIST' }]
+    }),
+    updateArticle: builder.mutation({
+      query: (slug, articleData) => ({
+        url: `articles/${slug}`,
+        method: 'PUT',
+        body: { article: articleData }
+      }),
+      invalidatesTags: [{ type: 'Posts', id: 'LIST' }]
+    }),
+    deleteArticle: builder.mutation({
+      query: (slug) => ({
+        url: `articles/${slug}`,
+        method: 'DELETE'
+      }),
+      invalidatesTags: [{ type: 'Posts', id: 'LIST' }]
     })
   })
 })
@@ -81,5 +104,8 @@ export const {
   useSignUpMutation,
   useUpdateUserMutation,
   useFavoritePostMutation,
-  useUnfavoritePostMutation
+  useUnfavoritePostMutation,
+  useCreateArticleMutation,
+  useUpdateArticleMutation,
+  useDeleteArticleMutation
 } = blogApi

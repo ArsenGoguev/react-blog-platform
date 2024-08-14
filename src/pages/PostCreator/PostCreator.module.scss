@@ -2,5 +2,52 @@
 @import '../../styles/mixins.scss';
 
 .form {
-  @include form(938px, 701px);
+  @include form(938px, auto);
+
+  .item {
+    margin-bottom: 21px;
+  }
+
+  .tagsHeader {
+    display: block;
+    margin-bottom: 5px;
+
+    font-family: $font;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: left;
+  }
+  
+  .wrapper {
+    display: flex;
+
+    .space {
+      gap: 17px;
+      margin-bottom: 5px;
+      max-height: 30px;
+  
+      .input {
+        width: 300px;
+      }
+
+      .deleteButton {
+        color: $delete-color;
+        border-color: $delete-color;
+        margin-right: 17px;
+      }
+    }
+  }
+
+
+  .addButtonWrapper {
+    height: 30px;
+    align-self: flex-end;
+    margin-bottom: 5px;
+
+    .addButton {
+      color: $accent-color;
+      border-color: $accent-color;
+    }
+  }
 }

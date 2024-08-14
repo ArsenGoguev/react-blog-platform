@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import { useHandleUserResponse } from '../../utils/hooks.js'
 import { getMarginBottom } from '../../utils/service.js'
-import { formRules } from '../../utils/formRules.js'
+import { userFormRules } from '../../utils/formRules.js'
 import { useLoginInMutation } from '../../store/blogApi.js'
 
 import styles from './LoginPage.module.scss'
@@ -28,21 +28,20 @@ export default function LoginPage() {
       ) : null}
       <div className={styles.header}>Sign In</div>
       <Form onFinish={signIn} layout="vertical">
-        <Form.Item style={getMarginBottom(12)} label="Email address" name="email" rules={formRules.email}>
+        <Form.Item style={getMarginBottom(12)} label="Email address" name="email" rules={userFormRules.email}>
           <Input placeholder="Email address" />
         </Form.Item>
 
-        <Form.Item style={getMarginBottom(21)} label="Password" name="password" rules={formRules.password}>
+        <Form.Item style={getMarginBottom(21)} label="Password" name="password" rules={userFormRules.password}>
           <Input.Password placeholder="Password" />
         </Form.Item>
 
         <Form.Item style={getMarginBottom(8)}>
-          <Button className={styles.button} type="primary" htmlType="submit">
+          <Button block className={styles.button} type="primary" htmlType="submit">
             Login
           </Button>
         </Form.Item>
       </Form>
-
       <div className={styles.alert}>
         Don&apos;t have an account?
         <Link to="/sign-up" className={styles.signin}>

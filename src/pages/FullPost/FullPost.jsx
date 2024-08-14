@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-boolean-value */
 import React from 'react'
 import { useLocation } from 'react-router-dom'
 import Markdown from 'markdown-to-jsx'
@@ -20,7 +21,7 @@ export default function FullPost() {
   return (
     <div className={styles.post}>
       <div className={styles.preview}>
-        <PostContent post={data.article} />
+        <PostContent post={data.article} full={true} />
       </div>
       <div className={styles.markdown}>
         <Markdown>{data.article.body}</Markdown>

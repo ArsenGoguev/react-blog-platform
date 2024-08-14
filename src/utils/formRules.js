@@ -25,7 +25,7 @@ const recurringRules = {
   ]
 }
 
-export const formRules = {
+export const userFormRules = {
   email: [
     ...recurringRules.email,
     {
@@ -65,6 +65,43 @@ export const formRules = {
     {
       required: true,
       message: 'You must agree to the processing of personal data'
+    }
+  ]
+}
+
+export const postFormRules = {
+  title: [
+    {
+      required: true,
+      min: 3,
+      max: 50,
+      message: 'The name must contain at least 3 and no more than 50 characters'
+    }
+  ],
+  description: [
+    {
+      required: true,
+      min: 3,
+      max: 300,
+      message: 'The short description must be at least 3 and no more than 300 characters'
+    }
+  ],
+  text: [
+    {
+      required: true,
+      min: 3,
+      max: 18000,
+      message: 'The text of the post should contain from 3 to 18 000 characters'
+    }
+  ],
+  tag: [
+    {
+      pattern: /^[a-zA-Z0-9]+$/,
+      message: 'Only Latin letters and numbers without spaces'
+    },
+    {
+      max: 25,
+      message: 'Maximum of 25 characters'
     }
   ]
 }

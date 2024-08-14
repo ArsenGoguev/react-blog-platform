@@ -4,6 +4,10 @@
 .form {
   @include form(384px, 599px);
 
+  .alert {
+    @include alert;
+  }
+
   .divider {
     margin-top: 21px;
     margin-bottom: 8px;

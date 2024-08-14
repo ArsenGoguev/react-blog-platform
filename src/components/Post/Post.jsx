@@ -1,12 +1,12 @@
-import React from 'react'
-import { Alert, Flex, Spin, Tag } from 'antd'
+import React, { useEffect } from 'react'
+import { Alert, Button, Flex, Popconfirm, Spin, Tag } from 'antd'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { v4 as generateId } from 'uuid'
 import { HeartFilled, HeartOutlined } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 
-import { useFavoritePostMutation, useUnfavoritePostMutation } from '../../store/blogApi.js'
+import { useFavoritePostMutation, useUnfavoritePostMutation, useDeleteArticleMutation } from '../../store/blogApi.js'
 
 import styles from './Post.module.scss'
 
@@ -18,12 +18,17 @@ export default function Post({ post }) {
   )
 }
 
-export function PostContent({ post }) {
-  const isAuth = useSelector((state) => state.blog.auth)
+export function PostContent({ post, full = false }) {
+  const { auth, user } = useSelector((state) => state.blog)
+  const { username } = user
+  const navigate = useNavigate()
+  const [deleteArticle, { isDeleteLoading, deleteError, isSuccess }] = useDeleteArticleMutation()
   const [favoritePost, { isFavLoading, favError }] = useFavoritePostMutation()
   const [unfavoritePost, { isRemLoading, remError }] = useUnfavoritePostMutation()
 
-  if (isFavLoading) console.log('ku')
+  useEffect(() => {
+    if (isSuccess) navigate('/articles')
+  }, [isSuccess, navigate])
 
   const handleFavorite = () => {
     if (post.favorited) {
@@ -31,6 +36,10 @@ export function PostContent({ post }) {
     } else {
       favoritePost(post.slug)
     }
+  }
+
+  const onDeleteArticle = () => {
+    deleteArticle(post.slug)
   }
 
   const avatar = post.author.image
@@ -51,15 +60,19 @@ export function PostContent({ post }) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' }
   const formattedDate = date.toLocaleDateString('en-US', options)
 
+  if (isDeleteLoading) return <Spin size="large" fullscreen />
+
   return (
     <>
       <div className={styles.main}>
-        {(favError || remError) && <Alert type="error" message="error" />}
+        {(favError || remError || deleteError) && (
+          <Alert type="error" message="Error" description="Something went wrong." />
+        )}
         <div className={styles.header}>
           <Link className={styles.title} to={`/articles/${post.slug}`} state={{ slug: post.slug }}>
             {post.title}
           </Link>
-          <button type="button" disabled={!isAuth} className={styles.likes} onClick={handleFavorite}>
+          <button type="button" disabled={!auth} className={styles.likes} onClick={handleFavorite}>
             {post.favorited ? <HeartFilled style={{ color: '#f44336' }} /> : <HeartOutlined />}
             <span className={styles.count}>{post.favoritesCount}</span>
           </button>
@@ -72,12 +85,29 @@ export function PostContent({ post }) {
         <p className={styles.text}>{post.description}</p>
       </div>
 
-      <div className={styles.author}>
-        <div>
-          <div className={styles.name}>{post.author.username}</div>
-          <div className={styles.date}>{formattedDate}</div>
+      <div>
+        <div className={styles.author}>
+          <div>
+            <div className={styles.name}>{post.author.username}</div>
+            <div className={styles.date}>{formattedDate}</div>
+          </div>
+          <img className={styles.avatar} src={avatar} alt="avatar" />
         </div>
-        <img className={styles.avatar} src={avatar} alt="avatar" />
+        {full && username === post.author.username && (
+          <div className={styles.buttonsWrapper}>
+            <Popconfirm
+              description="Are you sure to delete this article?"
+              okText="Yes"
+              cancelText="No"
+              onConfirm={onDeleteArticle}
+            >
+              <Button danger>Delete</Button>
+            </Popconfirm>
+            <Link to="/" className={styles.editButton}>
+              Edit
+            </Link>
+          </div>
+        )}
       </div>
     </>
   )
@@ -88,6 +118,7 @@ Post.propTypes = {
 }
 
 PostContent.propTypes = {
+  full: PropTypes.bool,
   post: PropTypes.shape({
     slug: PropTypes.string.isRequired,
     title: PropTypes.string,
