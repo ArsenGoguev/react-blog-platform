@@ -79,7 +79,7 @@ export const blogApi = createApi({
       invalidatesTags: [{ type: 'Posts', id: 'LIST' }]
     }),
     updateArticle: builder.mutation({
-      query: (slug, articleData) => ({
+      query: ({ slug, articleData }) => ({
         url: `articles/${slug}`,
         method: 'PUT',
         body: { article: articleData }

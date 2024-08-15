@@ -22,9 +22,9 @@ export function PostContent({ post, full = false }) {
   const { auth, user } = useSelector((state) => state.blog)
   const { username } = user
   const navigate = useNavigate()
-  const [deleteArticle, { isDeleteLoading, deleteError, isSuccess }] = useDeleteArticleMutation()
-  const [favoritePost, { isFavLoading, favError }] = useFavoritePostMutation()
-  const [unfavoritePost, { isRemLoading, remError }] = useUnfavoritePostMutation()
+  const [deleteArticle, { isLoading: isDeleteLoading, error: deleteError, isSuccess }] = useDeleteArticleMutation()
+  const [favoritePost, { isLoading: isFavLoading, error: favError }] = useFavoritePostMutation()
+  const [unfavoritePost, { isLoading: isRemLoading, error: remError }] = useUnfavoritePostMutation()
 
   useEffect(() => {
     if (isSuccess) navigate('/articles')
@@ -103,7 +103,7 @@ export function PostContent({ post, full = false }) {
             >
               <Button danger>Delete</Button>
             </Popconfirm>
-            <Link to="/" className={styles.editButton}>
+            <Link to={`/articles/${post.slug}/edit`} className={styles.editButton} state={post}>
               Edit
             </Link>
           </div>

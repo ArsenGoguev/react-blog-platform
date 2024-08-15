@@ -1,38 +1,40 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Form, Input, Button, Space, Alert } from 'antd'
+import PropTypes from 'prop-types'
 
-import Spinner from '../../components/Spinner/Spinner.jsx'
+import Spinner from '../Spinner/Spinner.jsx'
 import { postFormRules } from '../../utils/formRules.js'
 import { getMarginBottom } from '../../utils/service.js'
-import { useCreateArticleMutation } from '../../store/blogApi.js'
 
-import styles from './PostCreator.module.scss'
+import styles from './PostForm.module.scss'
 
-export default function PostCreator() {
-  const [createArticle, { isLoading, error, isSuccess }] = useCreateArticleMutation()
-  const [form] = Form.useForm()
-
-  const handleCreate = (values) => {
-    createArticle(values).then(() => {
-      form.resetFields(['title', 'description', 'body', 'tagList'])
-    })
-  }
+export default function PostForm({ post, handle, form, isLoading, error, isSuccess }) {
+  useEffect(() => {
+    if (post) {
+      form.setFieldsValue({
+        title: post.title,
+        description: post.description,
+        body: post.body,
+        tagList: post.tagList
+      })
+    }
+  }, [post, form])
 
   return (
     <div className={styles.form}>
       {error && <Alert type="error" message="Ooops!" description="Something went wrong!" showIcon />}
-      {isLoading && <Spinner />}
+      {isLoading && <Spinner margin={0} />}
       {isSuccess && (
         <Alert
           style={getMarginBottom(20)}
           type="success"
           showIcon
           message="Success!"
-          description="The post was successfully created."
+          description="The post was successfully sended."
         />
       )}
-      <div className={styles.header}>Create new article</div>
-      <Form form={form} layout="vertical" onFinish={handleCreate}>
+      <div className={styles.header}>{post ? 'Edit article' : 'Create new article'}</div>
+      <Form form={form} layout="vertical" onFinish={handle}>
         <Form.Item className={styles.item} label="Title" name="title" rules={postFormRules.title}>
           <Input placeholder="Title" />
         </Form.Item>
@@ -83,4 +85,13 @@ export default function PostCreator() {
       </Form>
     </div>
   )
+}
+
+PostForm.propTypes = {
+  post: PropTypes.object,
+  handle: PropTypes.func.isRequired,
+  form: PropTypes.object.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  error: PropTypes.object,
+  isSuccess: PropTypes.bool.isRequired
 }
