@@ -4,16 +4,16 @@ import { Alert } from 'antd'
 import { useSelector } from 'react-redux'
 
 import PostList from '../pages/PostList.jsx'
-import FullPost from '../pages/FullPost/FullPost.jsx'
-import LoginPage from '../pages/LoginPage/LoginPage.jsx'
-import RegistrationPage from '../pages/RegistrationPage/RegistrationPage.jsx'
-import ProfileEditor from '../pages/ProfileEditor/ProfileEditor.jsx'
+import FullPost from '../pages/FullPost.jsx'
+import LoginPage from '../pages/LoginPage.jsx'
+import RegistrationPage from '../pages/RegistrationPage.jsx'
+import ProfileEditor from '../pages/ProfileEditor.jsx'
 import PostCreator from '../pages/PostCreator.jsx'
 import PostEditor from '../pages/PostEditor.jsx'
 import Layout from '../components/Layout.jsx'
 
 export default function App() {
-  const isAuth = useSelector((state) => state.blog.auth)
+  const { auth } = useSelector((state) => state.blog)
 
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -21,11 +21,11 @@ export default function App() {
         <Route index element={<PostList />} />
         <Route path="articles" element={<Navigate to="/" replace />} />
         <Route path="articles/:slug" element={<FullPost />} />
-        <Route path="login-in" element={isAuth ? <Navigate to="/" replace /> : <LoginPage />} />
-        <Route path="sign-up" element={isAuth ? <Navigate to="/" replace /> : <RegistrationPage />} />
-        <Route path="profile" element={isAuth ? <ProfileEditor /> : <Navigate to="/" replace />} />
-        <Route path="new-article" element={isAuth ? <PostCreator /> : <Navigate to="/" replace />} />
-        <Route path="articles/:slug/edit" element={isAuth ? <PostEditor /> : <Navigate to="/" replace />} />
+        <Route path="login-in" element={auth ? <Navigate to="/" replace /> : <LoginPage />} />
+        <Route path="sign-up" element={auth ? <Navigate to="/" replace /> : <RegistrationPage />} />
+        <Route path="profile" element={auth ? <ProfileEditor /> : <Navigate to="/" replace />} />
+        <Route path="new-article" element={auth ? <PostCreator /> : <Navigate to="/" replace />} />
+        <Route path="articles/:slug/edit" element={auth ? <PostEditor /> : <Navigate to="/" replace />} />
         <Route
           path="*"
           element={

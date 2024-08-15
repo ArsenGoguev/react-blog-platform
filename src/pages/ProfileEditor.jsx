@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
-import { Form, Input, Button, Spin, Alert } from 'antd'
+import { Form, Input, Button, Alert } from 'antd'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { useHandleUserResponse } from '../../utils/hooks.js'
-import { getMarginBottom, handleEmailChange, getErrorMessage } from '../../utils/service.js'
-import { editProfileForm } from '../../utils/formRules.js'
-import { useUpdateUserMutation } from '../../store/blogApi.js'
-
-import styles from './ProfileEditor.module.scss'
+import { useHandleUserResponse } from '../utils/hooks.js'
+import { getMarginBottom, handleEmailChange, getErrorMessage } from '../utils/service.js'
+import { editProfileForm } from '../utils/formRules.js'
+import { useUpdateUserMutation } from '../store/blogApi.js'
+import styles from '../styles/modules/Form.module.scss'
+import Spinner from '../components/Spinner/Spinner.jsx'
 
 export default function ProfileEditor() {
   const navigate = useNavigate()
@@ -32,9 +32,9 @@ export default function ProfileEditor() {
 
   return (
     <div className={styles.form}>
-      {isLoading ? <Spin size="large" fullscreen /> : null}
+      {isLoading ? <Spinner fullscreen={true} /> : null}
       {errorFields.length > 0 ? (
-        <Alert banner closable style={{ marginBottom: 21 }} message="You entered incorrect data" type="error" />
+        <Alert banner closable style={getMarginBottom(21)} message="You entered incorrect data" type="error" />
       ) : null}
       <div className={styles.header}>Edit Profile</div>
       <Form form={form} layout="vertical" onFinish={handleEdit}>

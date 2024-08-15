@@ -2,8 +2,6 @@ import React from 'react'
 import { Pagination, ConfigProvider } from 'antd'
 import PropTypes from 'prop-types'
 
-import styles from './CustomPagination.module.scss'
-
 export default function CustomPagination({ currentPage, onPageChange, totalPages }) {
   const changePage = (page) => {
     onPageChange(page)
@@ -25,7 +23,7 @@ export default function CustomPagination({ currentPage, onPageChange, totalPages
       }}
     >
       <Pagination
-        className={styles.pagination}
+        style={{ margin: '26px 0' }}
         current={currentPage}
         hideOnSinglePage
         pageSize={1}

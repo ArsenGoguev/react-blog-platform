@@ -2,7 +2,7 @@
 @import '../../styles/mixins.scss';
 
 .form {
-  @include form(938px, auto);
+  @include form(938px);
 
   .item {
     margin-bottom: 21px;
@@ -11,7 +11,6 @@
   .tagsHeader {
     display: block;
     margin-bottom: 5px;
-
     font-family: $font;
     font-size: 14px;
     font-weight: 400;

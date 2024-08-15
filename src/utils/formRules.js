@@ -64,6 +64,8 @@ export const userFormRules = {
   agreement: [
     {
       required: true,
+      transform: (value) => value || undefined,
+      type: 'boolean',
       message: 'You must agree to the processing of personal data'
     }
   ]

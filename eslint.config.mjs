@@ -54,6 +54,7 @@ export default [
   {
     rules: {
       'react/jsx-props-no-spreading': 0,
+      'react/jsx-boolean-value': 0,
       'object-curly-newline': 0,
       indent: ['error', 2],
       'jsx-a11y/no-noninteractive-element-interactions': 0,

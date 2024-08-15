@@ -13,7 +13,7 @@ export default function PostList() {
   const page = useSelector((state) => state.blog.page)
   const { data, error, isLoading } = useGetPostsQuery(page)
 
-  if (isLoading) return <Spinner />
+  if (isLoading) return <Spinner margin={108} />
   if (error) {
     return <Alert type="error" message="Error" description="Something went wrong. Try to reload the page." showIcon />
   }

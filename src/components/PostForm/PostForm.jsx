@@ -23,7 +23,7 @@ export default function PostForm({ post, handle, form, isLoading, error, isSucce
   return (
     <div className={styles.form}>
       {error && <Alert type="error" message="Ooops!" description="Something went wrong!" showIcon />}
-      {isLoading && <Spinner margin={0} />}
+      {isLoading && <Spinner />}
       {isSuccess && (
         <Alert
           style={getMarginBottom(20)}

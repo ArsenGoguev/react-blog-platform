@@ -1,10 +1,9 @@
 @import './variables.scss';
 
-@mixin form($width, $height) {
+@mixin form($width) {
   background-color: $bg-color;
   margin: 139px auto 30px;
   width: $width;
-  min-height: $height;
   padding: 48px 32px;
   box-shadow: $shadow;
   border-radius: 5px;

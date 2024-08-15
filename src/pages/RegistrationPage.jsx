@@ -1,13 +1,13 @@
 import React from 'react'
-import { Form, Input, Checkbox, Button, Divider, Spin, Alert } from 'antd'
+import { Form, Input, Checkbox, Button, Divider, Alert } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { useHandleUserResponse } from '../../utils/hooks.js'
-import { getMarginBottom, handleEmailChange, getErrorMessage } from '../../utils/service.js'
-import { userFormRules } from '../../utils/formRules.js'
-import { useSignUpMutation } from '../../store/blogApi.js'
-
-import styles from './RegistrationPage.module.scss'
+import { useHandleUserResponse } from '../utils/hooks.js'
+import { getMarginBottom, handleEmailChange, getErrorMessage } from '../utils/service.js'
+import { userFormRules } from '../utils/formRules.js'
+import { useSignUpMutation } from '../store/blogApi.js'
+import styles from '../styles/modules/Form.module.scss'
+import Spinner from '../components/Spinner/Spinner.jsx'
 
 export default function RegistrationPage() {
   const navigate = useNavigate()
@@ -24,9 +24,9 @@ export default function RegistrationPage() {
 
   return (
     <div className={styles.form}>
-      {isLoading ? <Spin size="large" fullscreen /> : null}
+      {isLoading ? <Spinner fullscreen={true} /> : null}
       {errorFields.length > 0 ? (
-        <Alert banner closable style={{ marginBottom: 21 }} message="You entered incorrect data" type="error" />
+        <Alert banner closable style={getMarginBottom(21)} message="You entered incorrect data" type="error" />
       ) : null}
 
       <div className={styles.header}>Create new account</div>

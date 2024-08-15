@@ -1,0 +1,41 @@
+@import '../variables.scss';
+@import '../mixins.scss';
+
+.form {
+  @include form(384px);
+
+  .alert {
+    font-family: $font;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: center;
+  
+    .signin {
+      color: $accent-color;
+  
+      &:visited {
+        color: $accent-color;
+      }
+    }
+  }
+
+  .divider {
+    margin-top: 21px;
+    margin-bottom: 8px;
+  }
+
+  .checkbox {
+    gap: 8px;
+  }
+
+  .preview {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .markdown {
+    margin-top: 26px;
+    overflow: auto;
+  }
+}

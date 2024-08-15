@@ -1,13 +1,13 @@
 import React from 'react'
-import { Form, Input, Button, Spin, Alert } from 'antd'
+import { Form, Input, Button, Alert } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { useHandleUserResponse } from '../../utils/hooks.js'
-import { getMarginBottom } from '../../utils/service.js'
-import { userFormRules } from '../../utils/formRules.js'
-import { useLoginInMutation } from '../../store/blogApi.js'
-
-import styles from './LoginPage.module.scss'
+import { useHandleUserResponse } from '../utils/hooks.js'
+import { getMarginBottom } from '../utils/service.js'
+import { userFormRules } from '../utils/formRules.js'
+import { useLoginInMutation } from '../store/blogApi.js'
+import styles from '../styles/modules/Form.module.scss'
+import Spinner from '../components/Spinner/Spinner.jsx'
 
 export default function LoginPage() {
   const navigate = useNavigate()
@@ -22,7 +22,7 @@ export default function LoginPage() {
 
   return (
     <div className={styles.form}>
-      {isLoading ? <Spin size="large" fullscreen /> : null}
+      {isLoading ? <Spinner fullscreen={true} /> : null}
       {error ? (
         <Alert banner closable style={{ marginBottom: 21 }} message="Invalid e-mail or password" type="error" />
       ) : null}

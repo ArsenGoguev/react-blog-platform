@@ -6,7 +6,8 @@ import { v4 as generateId } from 'uuid'
 import { HeartFilled, HeartOutlined } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 
-import { useFavoritePostMutation, useUnfavoritePostMutation, useDeleteArticleMutation } from '../../store/blogApi.js'
+import { useFavoritePostMutation, useUnfavoritePostMutation } from '../../store/blogApi.js'
+import Spinner from '../Spinner/Spinner.jsx'
 
 import styles from './Post.module.scss'
 
@@ -18,11 +19,10 @@ export default function Post({ post }) {
   )
 }
 
-export function PostContent({ post, full = false }) {
+export function PostContent({ post, full = false, deleteArticle, isDeleteLoading, deleteError, isSuccess }) {
   const { auth, user } = useSelector((state) => state.blog)
   const { username } = user
   const navigate = useNavigate()
-  const [deleteArticle, { isLoading: isDeleteLoading, error: deleteError, isSuccess }] = useDeleteArticleMutation()
   const [favoritePost, { isLoading: isFavLoading, error: favError }] = useFavoritePostMutation()
   const [unfavoritePost, { isLoading: isRemLoading, error: remError }] = useUnfavoritePostMutation()
 
@@ -60,7 +60,7 @@ export function PostContent({ post, full = false }) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' }
   const formattedDate = date.toLocaleDateString('en-US', options)
 
-  if (isDeleteLoading) return <Spin size="large" fullscreen />
+  if (isDeleteLoading) return <Spinner fullscreen={true} />
 
   return (
     <>
@@ -118,6 +118,10 @@ Post.propTypes = {
 }
 
 PostContent.propTypes = {
+  deleteArticle: PropTypes.func,
+  isDeleteLoading: PropTypes.bool,
+  deleteError: PropTypes.object,
+  isSuccess: PropTypes.bool,
   full: PropTypes.bool,
   post: PropTypes.shape({
     slug: PropTypes.string.isRequired,
