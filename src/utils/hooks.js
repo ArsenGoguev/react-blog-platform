@@ -12,7 +12,9 @@ export const useHandleUserResponse = (data, navigate, editing = false) => {
       const { username, email, image, token } = data.user
       localStorage.setItem('token', token)
       dispatch(setUser({ username, email, image }))
-      if (!editing) navigate('/')
+      if (!editing) {
+        navigate('/')
+      }
     }
-  }, [data, dispatch, navigate, editing])
+  }, [data, dispatch, editing]) // eslint-disable-line
 }
