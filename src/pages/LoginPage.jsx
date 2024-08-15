@@ -20,12 +20,14 @@ export default function LoginPage() {
     loginIn({ email, password, image })
   }
 
+  const renderAlert = (message, type) => (
+    <Alert banner closable style={{ marginBottom: 21 }} message={message} type={type} />
+  )
+
   return (
     <div className={styles.form}>
-      {isLoading ? <Spinner fullscreen={true} /> : null}
-      {error ? (
-        <Alert banner closable style={{ marginBottom: 21 }} message="Invalid e-mail or password" type="error" />
-      ) : null}
+      {isLoading && <Spinner fullscreen={true} />}
+      {error && renderAlert('Invalid e-mail or password', 'error')}
       <div className={styles.header}>Sign In</div>
       <Form onFinish={signIn} layout="vertical">
         <Form.Item style={getMarginBottom(12)} label="Email address" name="email" rules={userFormRules.email}>

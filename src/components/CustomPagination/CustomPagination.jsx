@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Pagination, ConfigProvider } from 'antd'
 import PropTypes from 'prop-types'
 
-export default function CustomPagination({ currentPage, onPageChange, totalPages }) {
+function CustomPagination({ currentPage, onPageChange, totalPages }) {
   const changePage = (page) => {
     onPageChange(page)
   }
@@ -41,3 +41,5 @@ CustomPagination.propTypes = {
   onPageChange: PropTypes.func.isRequired,
   totalPages: PropTypes.number.isRequired
 }
+
+export default memo(CustomPagination)

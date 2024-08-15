@@ -38,7 +38,6 @@ export default function PostForm({ post, handle, form, isLoading, error, isSucce
         <Form.Item className={styles.item} label="Title" name="title" rules={postFormRules.title}>
           <Input placeholder="Title" />
         </Form.Item>
-
         <Form.Item
           className={styles.item}
           label="Short description"
@@ -47,11 +46,9 @@ export default function PostForm({ post, handle, form, isLoading, error, isSucce
         >
           <Input placeholder="Description" />
         </Form.Item>
-
         <Form.Item className={styles.item} label="Text" name="body" rules={postFormRules.text}>
           <Input.TextArea placeholder="Text" rows={8} />
         </Form.Item>
-
         <span className={styles.tagsHeader}>Tags</span>
         <Form.List name="tagList">
           {(fields, { add, remove }) => (
@@ -76,7 +73,6 @@ export default function PostForm({ post, handle, form, isLoading, error, isSucce
             </div>
           )}
         </Form.List>
-
         <Form.Item style={getMarginBottom(0)}>
           <Button style={{ width: 320, marginTop: 21 }} className={styles.button} type="primary" htmlType="submit">
             Send
