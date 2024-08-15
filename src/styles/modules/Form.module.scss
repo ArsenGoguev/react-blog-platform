@@ -5,24 +5,11 @@
   @include form(384px);
 
   .alert {
-    font-family: $font;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 20px;
-    text-align: center;
-  
-    .signin {
-      color: $accent-color;
-  
-      &:visited {
-        color: $accent-color;
-      }
-    }
+    @include alert;
   }
 
   .divider {
-    margin-top: 21px;
-    margin-bottom: 8px;
+    @include margin-top-bottom(21px, 8px);
   }
 
   .checkbox {
@@ -35,7 +22,7 @@
   }
 
   .markdown {
-    margin-top: 26px;
+    @include margin-top-bottom(26px, 0);
     overflow: auto;
   }
 }

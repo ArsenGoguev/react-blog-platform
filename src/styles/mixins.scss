@@ -60,3 +60,22 @@
     color: $color;
   }
 }
+
+@mixin margin-top-bottom($top, $bottom) {
+  margin-top: $top;
+  margin-bottom: $bottom;
+}
+
+@mixin font-style($size, $weight, $lineHeight, $color: $text-color-main) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $lineHeight;
+  color: $color;
+}
+
+@mixin component($height, $padding, $bgclr, $display) {
+  background-color: $bgclr;
+  height: $height;
+  padding: $padding;
+  display: $display;
+}

@@ -7,7 +7,7 @@ import { Alert } from 'antd'
 import { PostContent } from '../components/Post/Post.jsx'
 import { useGetPostQuery, useDeleteArticleMutation } from '../store/blogApi.js'
 import Spinner from '../components/Spinner/Spinner.jsx'
-import styles from '../styles/modules/Post.module.scss'
+import styles from '../styles/modules/FullPost.module.scss'
 
 export default function FullPost() {
   const loc = useLocation()
@@ -15,7 +15,7 @@ export default function FullPost() {
   const { data, isLoading, error } = useGetPostQuery(slug)
   const [deleteArticle, { isLoading: isDeleteLoading, error: deleteError, isSuccess }] = useDeleteArticleMutation()
 
-  if (isLoading) return <Spinner />
+  if (isLoading) return <Spinner margin={108} />
   if (error) return <Alert type="error" message="Error" description="Something went wrong" showIcon />
 
   return (

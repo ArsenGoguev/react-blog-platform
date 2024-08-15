@@ -1,4 +1,5 @@
 @import '../variables.scss';
+@import '../mixins.scss';
 
 .post {
   margin: 108px auto 30px;
@@ -13,7 +14,7 @@
   }
 
   .markdown {
-    margin-top: 26px;
+    @include margin-top-bottom(26px, 0);
     overflow: auto;
   }
 }
